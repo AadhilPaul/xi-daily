@@ -21,19 +21,19 @@ class PlayerClub(models.Model):
         ordering = ['joined']
 
     def __str__(self):
-        return f'{self.player.name} -> {self.player.club}'
+        return f'{self.player.name} -> {self.club_name}'
 
 
 class Match(models.Model):
     home_team = models.CharField(max_length=100)
     away_team = models.CharField(max_length=100)
-    competetion = models.CharField(max_length=200)
+    competition = models.CharField(max_length=200)
     season = models.CharField(max_length=20)
     date_played = models.DateField()
     description = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
-        return f'{self.home_team} vs {self.away_team} - {self.competetion}'
+        return f'{self.home_team} vs {self.away_team} - {self.competition}'
 
 
 class Puzzle(models.Model):
