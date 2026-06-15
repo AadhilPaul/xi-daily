@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { getTodaysPuzzle, searchPlayers, submitGuess } from "../api";
+import type { Puzzle, Hint, GuessResult, Player } from "../types";
 
 export function useGame() {
-  const [puzzle, setPuzzle] = useState(null);
-  const [guesses, setGuesses] = useState([]);
-  const [hints, setHints] = useState([]);
-  const [gameStatus, setGameStatus] = useState<"playing" | "lost" | "won">(
+  const [puzzle, setPuzzle] = useState<Puzzle | null>(null);
+  const [guesses, setGuesses] = useState<GuessResult[]>([]);
+  const [hints, setHints] = useState<Hint[]>([]);
+  const [gameStatus, setGameStatus] = useState<"playing" | "won" | "lost">(
     "playing",
   );
-  const [correctAnswer, setCorrectAnswer] = useState(null);
-  const [searchResults, setSearchResults] = useState([]);
+  const [correctAnswer, setCorrectAnswer] = useState<string | null>(null);
+  const [searchResults, setSearchResults] = useState<Player[]>([]);
 
   useEffect(() => {
     getTodaysPuzzle().then((data) => setPuzzle(data));
