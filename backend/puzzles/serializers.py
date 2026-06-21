@@ -23,6 +23,7 @@ class PuzzleSerializer(serializers.ModelSerializer):
             'competition': match.competition,
             'season': match.season,
             'description': match.description,
+            'formation_type': match.formation,
         }
 
     def get_formation(self, obj):

@@ -30,6 +30,7 @@ class Match(models.Model):
     competition = models.CharField(max_length=200)
     season = models.CharField(max_length=20)
     date_played = models.DateField()
+    formation = models.CharField(max_length=10, default='4-3-3')
     description = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
