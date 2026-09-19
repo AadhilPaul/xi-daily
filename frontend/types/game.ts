@@ -43,4 +43,12 @@ export interface GuessResponse {
   hint?: Hint | null;
 }
 
+export interface PuzzleResult {
+  completed: boolean;
+  attempts: Attempt[];
+  hints: Hint[];
+  solved: boolean;
+  correct_answer: string;
+}
+
 export type FormationCoordinates = Record<string, { x: string; y: string }>;

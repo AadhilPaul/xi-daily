@@ -5,4 +5,5 @@ urlpatterns = [
     path('puzzle/today/', views.today_puzzle, name='today_puzzle'),
     path('players/search/', views.search_player, name='player_search'),
     path('puzzle/<int:puzzle_id>/guess/', views.submit_guess, name='submit_guess'),
+    path('puzzle/<int:puzzle_id>/result/', views.puzzle_result, name='puzzle_result'),
 ]

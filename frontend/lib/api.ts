@@ -1,10 +1,23 @@
 import { BASE_URL } from "@/lib/constants";
 import { getUserUUID } from "@/lib/uuid";
-import type { GuessResponse, Player, Puzzle, Stats } from "@/types/game";
+import type {
+  GuessResponse,
+  Player,
+  Puzzle,
+  PuzzleResult,
+  Stats,
+} from "@/types/game";
 
 export async function fetchTodayPuzzle(): Promise<Puzzle> {
   const response = await fetch(`${BASE_URL}/api/puzzle/today/`);
   return response.json() as Promise<Puzzle>;
+}
+
+export async function fetchPuzzleResult(puzzleId: number): Promise<PuzzleResult> {
+  const response = await fetch(
+    `${BASE_URL}/api/puzzle/${puzzleId}/result/?uuid=${getUserUUID()}`,
+  );
+  return response.json() as Promise<PuzzleResult>;
 }
 
 export async function searchPlayers(query: string): Promise<Player[]> {

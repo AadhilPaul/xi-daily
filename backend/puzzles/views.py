@@ -1,5 +1,6 @@
 from rest_framework.response import Response
 from rest_framework import status
+from users.models import AnonymousUser, UserResult, Guess
 from rest_framework.decorators import api_view
 from .serializers import PuzzleSerializer, PlayerSearchSerializer
 from .models import Puzzle, Player
@@ -102,4 +103,37 @@ def submit_guess(request, puzzle_id):
         "game_over": False,
         "attempts_remaining": 5 - result.attempts_used,
         "hint": hint
+    })
+
+@api_view(['GET'])
+def puzzle_result(request, puzzle_id):
+    user_uuid = request.GET.get('uuid')
+    if not user_uuid:
+        return Response({"completed": False})
+
+    try:
+        user = AnonymousUser.objects.get(uuid=user_uuid)
+        puzzle = Puzzle.objects.get(id=puzzle_id)
+        result = UserResult.objects.get(user=user, puzzle=puzzle)
+    except (AnonymousUser.DoesNotExist, Puzzle.DoesNotExist, UserResult.DoesNotExist):
+        return Response({"completed": False})
+
+    guesses = Guess.objects.filter(result=result).order_by('attempt_number')
+
+    attempts = [
+        {"name": g.guessed_player.name, "correct": g.was_correct}
+        for g in guesses
+    ]
+
+    hints = [
+        g.hint_revealed for g in guesses
+        if g.hint_revealed is not None
+    ]
+
+    return Response({
+        "completed": True,
+        "solved": result.solved,
+        "attempts": attempts,
+        "hints": hints,
+        "correct_answer": puzzle.missing_player.name
     })

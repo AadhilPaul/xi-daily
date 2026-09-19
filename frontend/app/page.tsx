@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AttemptCounter } from "@/components/AttemptCounter";
 import { FootballPitch } from "@/components/FootballPitch";
 import { Footer } from "@/components/Footer";
@@ -13,7 +13,7 @@ import { useCountdown } from "@/hooks/useCountdown";
 import { usePlayerSearch } from "@/hooks/usePlayerSearch";
 import { usePuzzle } from "@/hooks/usePuzzle";
 import { useStats } from "@/hooks/useStats";
-import { submitPuzzleGuess } from "@/lib/api";
+import { fetchPuzzleResult, submitPuzzleGuess } from "@/lib/api";
 import { MAX_ATTEMPTS } from "@/lib/constants";
 import { getMissingPosition } from "@/lib/game";
 import type { Attempt, Hint, Player } from "@/types/game";
@@ -30,6 +30,20 @@ export default function Page() {
   const [copied, setCopied] = useState(false);
   const countdown = useCountdown();
   const stats = useStats(finished);
+
+  useEffect(() => {
+    if (!puzzle) return;
+
+    fetchPuzzleResult(puzzle.id).then((result) => {
+      if (!result.completed) return;
+
+      setAttempts(result.attempts);
+      setHints(result.hints);
+      setSolved(result.solved);
+      setFinished(true);
+      setCorrectAnswer(result.correct_answer);
+    });
+  }, [puzzle]);
 
   if (!puzzle || !puzzle.formation)
     return (
