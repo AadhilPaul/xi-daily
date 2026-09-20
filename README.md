@@ -1,5 +1,9 @@
 # ⚽ XI Daily
 
+![XI Daily Screenshot](screenshots/project_screenshot1.png)
+![XI Daily Screenshot](screenshots/project_screenshot2.png)
+![XI Daily Screenshot](screenshots/project_screenshot3.png)
+
 **A daily football puzzle where you complete a famous starting XI by identifying the missing player.**
 
 XI Daily is a full-stack football puzzle game inspired by the simplicity of daily puzzle games. Each day presents a different historic football match with one player missing from the starting XI. Use your football knowledge and the available hints to identify them.
