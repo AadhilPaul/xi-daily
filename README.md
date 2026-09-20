@@ -37,6 +37,7 @@ Current hints include:
 
 * **Nationality**
 * **Notable previous club**
+* **Age bracket**
 
 The previous-club hint focuses on notable clubs the player played for before the match, rather than simply showing their current club.
 
