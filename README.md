@@ -1,8 +1,10 @@
 # ⚽ XI Daily
 
-![XI Daily Screenshot](screenshots/project_screenshot1.png)
-![XI Daily Screenshot](screenshots/project_screenshot2.png)
-![XI Daily Screenshot](screenshots/project_screenshot3.png)
+<p align="center">
+  <img src="screenshots/project_screenshot1.png" width="30%" />
+  <img src="screenshots/project_screenshot2.png" width="30%" />
+  <img src="screenshots/project_screenshot3.png" width="30%" />
+</p>
 
 **A daily football puzzle where you complete a famous starting XI by identifying the missing player.**
 
