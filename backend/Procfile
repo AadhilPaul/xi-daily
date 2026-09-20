@@ -1,0 +1,1 @@
+web: gunicorn xi_daily.wsgi --log-file -
